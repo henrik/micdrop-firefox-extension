@@ -15,7 +15,7 @@ The extension's background script connects to the Mic Drop app over a WebSocket 
 
 ## Installation
 
-Requirements: macOS with the [Mic Drop app](https://getmicdrop.com/download-on-the-app-store) running, and Firefox 128 or later, or a Firefox-based browser such as Zen.
+Requirements: macOS with the [Mic Drop app](https://getmicdrop.com/download-on-the-app-store) running, and Firefox 140 or later, or a Firefox-based browser such as Zen.
 
 ### Quick test (temporary add-on)
 
@@ -44,7 +44,7 @@ The JavaScript is unchanged apart from the extra `origin-shim.js` and one fix in
 Changes in `src/manifest.json`:
 
 - **Background script:** `"background": { "scripts": [...], "type": "module" }` instead of `service_worker`, since Firefox's Manifest V3 doesn't support service workers.
-- **Firefox settings:** `browser_specific_settings.gecko` with an add-on `id`, `strict_min_version: "128.0"`, and `data_collection_permissions: { "required": ["none"] }`, which addons.mozilla.org asks new add-ons to declare.
+- **Firefox settings:** `browser_specific_settings.gecko` with an add-on `id`, `strict_min_version: "140.0"` (the first version with `data_collection_permissions`), and `data_collection_permissions: { "required": ["none"] }`, which addons.mozilla.org asks new add-ons to declare.
 - **Content security policy:** `extension_pages` set to `"script-src 'self'"`. Firefox's default MV3 policy adds `upgrade-insecure-requests`, which could interfere with the `ws://localhost` connection to the app.
 - **Removed:** the Chrome-only `update_url` and `minimum_chrome_version`.
 - **Origin workaround:** the `webRequest`, `webRequestBlocking`, `ws://localhost/*` and `http://localhost/*` permissions, and `origin-shim.js` (see below).
