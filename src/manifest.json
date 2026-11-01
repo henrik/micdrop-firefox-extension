@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "Mic Drop",
+  "version": "3.2.0",
+  "description": "Syncs meeting apps (Google Meet) with Mic Drop (macOS only). Unofficial Firefox port of the Chrome extension.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "mic-drop-firefox-port@local",
+      "strict_min_version": "128.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
+  "permissions": ["storage", "webRequest", "webRequestBlocking"],
+  "host_permissions": ["https://meet.google.com/*", "ws://localhost/*", "http://localhost/*"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://meet.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://meet.google.com/*"],
+      "js": ["site-styles.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": ["origin-shim.js", "background.js"],
+    "type": "module"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

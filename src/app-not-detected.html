@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mic Drop not found</title>
+    <link rel="stylesheet" href="webpage.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <div class="nav__inner">
+        <span class="nav__logo">Mic Drop</span>
+      </div>
+    </header>
+    <main class="main">
+      <div class="container">
+        <div class="content" id="not-detected" hidden>
+          <h1>Mic Drop needs to be running</h1>
+          <p>
+            This extension keeps Google Meet in sync with
+            <a href="https://getmicdrop.com/">Mic Drop</a> on your Mac, but it can’t find Mic Drop
+            right now.
+          </p>
+          <ul class="steps">
+            <li>
+              <strong>Don’t have Mic Drop yet?</strong>
+              <a href="https://getmicdrop.com/download-on-the-app-store"
+                >Get it for free on the Mac App Store</a
+              >.
+            </li>
+            <li>
+              <strong>Already installed?</strong> Make sure Mic Drop is open; you’ll see its icon in
+              your menu bar.
+            </li>
+            <li>
+              <strong>Still not working?</strong> Update Mic Drop to the latest version; older
+              versions can’t connect to this extension.
+            </li>
+          </ul>
+        </div>
+
+        <div class="content" id="connected" hidden>
+          <h1>You’re all set</h1>
+          <p>
+            Mic Drop is connected. Google Meet will now stay in sync with Mic Drop; you can close
+            this tab.
+          </p>
+        </div>
+
+        <div class="actions" id="check-actions" hidden>
+          <a class="button" id="open-app" href="mic-drop://">Open Mic Drop</a>
+          <button class="button button--secondary" id="check-again" type="button">
+            Check again
+          </button>
+          <span class="status" id="check-status" role="status"></span>
+        </div>
+      </div>
+    </main>
+    <script src="app-not-detected.js"></script>
+  </body>
+</html>
