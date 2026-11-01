@@ -39,7 +39,9 @@ To debug, click **Inspect** next to Mic Drop in `about:debugging`; the extension
 
 ## What changed from the Chrome version
 
-The JavaScript is unchanged apart from the extra `origin-shim.js`. Changes in `src/manifest.json`:
+The JavaScript is unchanged apart from the extra `origin-shim.js` and one fix in `content.js`: Meet in Firefox can ignore the extension's click on its mic button while the pre-join page is loading, and then report the old state. The original code takes that as a change made in Meet, which could unmute Mic Drop when opening a meeting page. The port ignores it instead and clicks again.
+
+Changes in `src/manifest.json`:
 
 - **Background script:** `"background": { "scripts": [...], "type": "module" }` instead of `service_worker`, since Firefox's Manifest V3 doesn't support service workers.
 - **Firefox settings:** `browser_specific_settings.gecko` with an add-on `id`, `strict_min_version: "128.0"`, and `data_collection_permissions: { "required": ["none"] }`, which addons.mozilla.org asks new add-ons to declare.

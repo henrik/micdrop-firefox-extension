@@ -202,8 +202,14 @@ function handleMuteStateChange(element) {
     // Meet reflecting a click we made to match the app; the app already has
     // this state, and reporting it back could flip the app if Meet ended up
     // somewhere unexpected.
-    if (pendingClick && pendingClick.mute === mute && Date.now() < pendingClick.until) {
-        pendingClick = null;
+    if (pendingClick && Date.now() < pendingClick.until) {
+        if (pendingClick.mute === mute) {
+            pendingClick = null;
+        }
+        else {
+            // Firefox port: Meet can ignore a click made while its pre-join page is still loading, then report its old state. Don't take that as the user's choice; the background sync clicks again once `pendingClick` expires.
+            console.log('[Mic Drop] Google Meet reported', mute ? 'muted' : 'live', 'despite our click; will retry.');
+        }
         return;
     }
     reportMuteState(mute);
